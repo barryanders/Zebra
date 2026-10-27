@@ -3,21 +3,21 @@ set -euo pipefail
 cd "$(dirname "$0")/.."
 swift build --build-system native -c release
 BIN_DIR="$(swift build --build-system native -c release --show-bin-path)"
-APP="dist/Daylight.app"
+APP="dist/Zebra.app"
 mkdir -p "$APP/Contents/MacOS" "$APP/Contents/Resources"
-cp "$BIN_DIR/Daylight" "$APP/Contents/MacOS/Daylight"
+cp "$BIN_DIR/TechnicolorZebra" "$APP/Contents/MacOS/TechnicolorZebra"
 cat > "$APP/Contents/Info.plist" <<'PLIST'
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0"><dict>
-<key>CFBundleExecutable</key><string>Daylight</string>
+<key>CFBundleExecutable</key><string>TechnicolorZebra</string>
 <key>CFBundleIdentifier</key><string>io.github.barryanders.daylight</string>
-<key>CFBundleName</key><string>Daylight</string>
-<key>CFBundleDisplayName</key><string>Daylight</string>
+<key>CFBundleName</key><string>Zebra</string>
+<key>CFBundleDisplayName</key><string>Zebra</string>
 <key>CFBundlePackageType</key><string>APPL</string>
-<key>CFBundleShortVersionString</key><string>0.1.1</string>
-<key>CFBundleVersion</key><string>2</string>
-<key>CFBundleIconFile</key><string>Daylight</string>
+<key>CFBundleShortVersionString</key><string>0.2.0</string>
+<key>CFBundleVersion</key><string>3</string>
+<key>CFBundleIconFile</key><string>TechnicolorZebra</string>
 <key>LSMinimumSystemVersion</key><string>14.0</string>
 <key>NSHighResolutionCapable</key><true/>
 <key>CFBundleDocumentTypes</key><array><dict>
@@ -28,8 +28,9 @@ cat > "$APP/Contents/Info.plist" <<'PLIST'
 </dict></array>
 </dict></plist>
 PLIST
-swift scripts/make-icon.swift "$APP/Contents/Resources/Daylight.icns"
+cp Assets/zebra-icon.png "$APP/Contents/Resources/Zebra.png"
+swift scripts/make-icon.swift "$APP/Contents/Resources/TechnicolorZebra.icns"
 codesign --force --sign - "$APP"
 codesign --verify --deep --strict "$APP"
-ditto -c -k --sequesterRsrc --keepParent "$APP" "dist/Daylight-$(uname -m).zip"
+ditto -c -k --sequesterRsrc --keepParent "$APP" "dist/Zebra-$(uname -m).zip"
 echo "Built $APP"

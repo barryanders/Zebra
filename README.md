@@ -1,10 +1,16 @@
-# Daylight
+# Zebra
 
-**Drop. Convert. Done.**
+**Wild color. Tamed.**
+
+<img src="Assets/zebra-icon.png" width="160" alt="Zebra app icon">
+
+[Website](https://barryanders.github.io/zebra/) · [Download preview](https://github.com/barryanders/zebra/releases/tag/v0.2.0)
+
+Previously called Daylight.
 
 A small native Mac app for making SDR copies of HDR videos. No encoding settings,
 accounts, uploads, subscriptions, or AI services. Drop a video, click **Make SDR
-copy**, and let Daylight work locally.
+copy**, and let Zebra work locally.
 
 > Early preview. HDR10 and HLG are supported. Dolby Vision is deliberately
 > rejected until profile-aware conversion is implemented and tested.
@@ -21,7 +27,8 @@ copy**, and let Daylight work locally.
 - Saves `Example SDR.mkv` beside `Example.mkv`. Existing names receive a number.
 - Never modifies or deletes the source. Cancellation removes the current partial.
 
-No network requests are made by the app. FFmpeg is invoked as a separate local
+Video processing makes no network requests. The optional **Buy me a coffee** link
+opens your browser only when clicked. FFmpeg is invoked as a separate local
 process with argument arrays, not shell commands.
 
 ## Install
@@ -35,12 +42,12 @@ an Intel build and working HEVC VideoToolbox encoding; Intel has not been tested
    brew install ffmpeg-full
    ```
 
-   Daylight finds the keg-only `ffmpeg-full` without changing your PATH. A standard
+   Zebra finds the keg-only `ffmpeg-full` without changing your PATH. A standard
    FFmpeg installation also works if it includes `zscale`, `tonemap`, and
    `hevc_videotoolbox`. Missing capabilities produce an actionable message.
 
-2. Download the Apple Silicon app ZIP from [Releases](https://github.com/barryanders/daylight/releases), unzip it, and move Daylight to Applications.
-3. Open Daylight and add videos.
+2. Download the Apple Silicon app ZIP from [Releases](https://github.com/barryanders/zebra/releases), unzip it, and move Zebra to Applications.
+3. Open Zebra and add videos.
 
 Preview builds are ad-hoc signed, **not Developer ID signed or notarized**.
 macOS may block a downloaded build; follow Apple's per-app **Privacy & Security →
@@ -55,11 +62,11 @@ Use a player with MKV and HEVC support, such as IINA or VLC.
 Install Xcode (or a compatible Swift toolchain with the macOS SDK), then:
 
 ```sh
-git clone https://github.com/barryanders/daylight.git
-cd daylight
+git clone https://github.com/barryanders/zebra.git
+cd zebra
 swift test --build-system native
 ./scripts/build-app.sh
-open dist/Daylight.app
+open "dist/Zebra.app"
 ```
 
 The build script creates an app and architecture-specific ZIP under `dist/`.
@@ -75,7 +82,7 @@ DAYLIGHT_INTEGRATION=1 swift test --build-system native --filter testGeneratedHD
 
 ## Automatic quality policy
 
-There are no quality controls. Daylight preserves dimensions and uses Hable tone
+There are no quality controls. Zebra preserves dimensions and uses Hable tone
 mapping, 10-bit HEVC, and a source-informed target bitrate:
 
 - 4K-class video (width ≥ 2500 or height > 1200): 1.25× source bitrate, bounded to 6–12 Mbps.
@@ -113,9 +120,14 @@ hardware encoding. Explain any changes to output appearance or stream handling.
 
 ## License and dependencies
 
-Daylight source is MIT licensed. SwiftUI, AppKit, and VideoToolbox are Apple system
+Zebra source is MIT licensed. SwiftUI, AppKit, and VideoToolbox are Apple system
 frameworks. FFmpeg is a separately installed executable, not copied into releases.
 FFmpeg and its enabled libraries have their own licenses; see
 [FFmpeg legal information](https://ffmpeg.org/legal.html). Homebrew's `ffmpeg-full`
 currently identifies its build as GPL-3.0-or-later. Anyone redistributing FFmpeg
 binaries must independently satisfy the applicable source and notice obligations.
+
+## Support
+
+[Buy me a coffee](https://buymeacoffee.com/barryanders). Support is optional;
+the app remains free. The same link is available in the window and Help menu.

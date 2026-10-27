@@ -1,7 +1,11 @@
 import SwiftUI
 import AppKit
 import UniformTypeIdentifiers
-import DaylightCore
+import TechnicolorZebraCore
+
+enum AppLinks {
+    static let coffee = URL(string: "https://buymeacoffee.com/barryanders")!
+}
 
 struct QueueItem: Identifiable {
     let id = UUID()
@@ -81,7 +85,7 @@ struct QueueItem: Identifiable {
                             items[index].status = error.localizedDescription
                             items[index].error = true
                         }
-                        if case DaylightError.cancelled = error { break }
+                        if case TechnicolorZebraError.cancelled = error { break }
                     }
                 }
             } catch { notice = error.localizedDescription }
@@ -96,16 +100,18 @@ struct ContentView: View {
     @State private var targeted = false
     var body: some View {
         VStack(spacing: 18) {
-            Text("HDR → SDR").font(.system(size: 10, weight: .medium, design: .rounded)).tracking(2).foregroundStyle(.secondary)
+            Text("HDR to SDR for Mac").font(.system(size: 10, weight: .medium, design: .rounded)).tracking(1).foregroundStyle(.secondary)
             Button(action: model.browse) {
                 VStack(spacing: 14) {
-                    Image(systemName: "sun.max")
-                        .font(.system(size: 28, weight: .light))
-                        .foregroundStyle(Color.accentColor)
-                        .frame(width: 66, height: 66)
-                        .background(.background, in: RoundedRectangle(cornerRadius: 18))
-                        .overlay(RoundedRectangle(cornerRadius: 18).stroke(.primary.opacity(0.08)))
-                        .shadow(color: .black.opacity(0.09), radius: 3, y: 3)
+                    if let url = Bundle.main.url(forResource: "Zebra", withExtension: "png"),
+                       let icon = NSImage(contentsOf: url) {
+                        Image(nsImage: icon).resizable().interpolation(.high)
+                            .scaledToFit().frame(width: 82, height: 82)
+                            .accessibilityHidden(true)
+                    } else {
+                        Image(systemName: "film").font(.system(size: 32)).frame(width: 82, height: 82)
+                            .accessibilityHidden(true)
+                    }
                     Text("Drop. Convert. Done.").font(.system(size: 21, weight: .medium)).tracking(-0.5)
                     Text("Drop videos here, or click to browse.").font(.system(size: 12)).foregroundStyle(.secondary)
                 }.frame(maxWidth: .infinity).padding(.vertical, 18)
@@ -159,6 +165,11 @@ struct ContentView: View {
             if !model.items.isEmpty && !model.running {
                 Button("Clear list", action: model.clear).buttonStyle(.plain).font(.system(size: 11)).foregroundStyle(.secondary)
             }
+            Link(destination: AppLinks.coffee) {
+                Label("Buy me a coffee", systemImage: "cup.and.saucer")
+                    .font(.system(size: 11)).foregroundStyle(.secondary)
+            }.buttonStyle(.plain)
+                .help("Optional support — opens Buy Me a Coffee in your browser")
         }.padding(26).frame(width: 340)
             .background(Color(nsColor: .windowBackgroundColor))
             .tint(Color(red: 0.28, green: 0.43, blue: 0.55))
@@ -178,18 +189,18 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         guard Self.model?.running == true else { return .terminateNow }
         let alert = NSAlert()
         alert.messageText = "A conversion is still running"
-        alert.informativeText = "Cancel it in Daylight before quitting. Your original video is safe."
-        alert.addButton(withTitle: "Keep Daylight open")
+        alert.informativeText = "Cancel it in Zebra before quitting. Your original video is safe."
+        alert.addButton(withTitle: "Keep Zebra open")
         alert.runModal()
         return .terminateCancel
     }
 }
 
-@main struct DaylightApp: App {
+@main struct TechnicolorZebraApp: App {
     @NSApplicationDelegateAdaptor(AppDelegate.self) var delegate
     @StateObject private var model = AppModel()
     var body: some Scene {
-        Window("Daylight", id: "main") {
+        Window("Zebra", id: "main") {
             ContentView().environmentObject(model)
                 .onAppear { AppDelegate.model = model }
         }
@@ -198,6 +209,9 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         .commands {
             CommandGroup(replacing: .newItem) { Button("Add videos…", action: model.browse).keyboardShortcut("o") }
             CommandGroup(replacing: .appSettings) { }
+            CommandGroup(after: .help) {
+                Button("Buy me a coffee…") { NSWorkspace.shared.open(AppLinks.coffee) }
+            }
         }
     }
 }

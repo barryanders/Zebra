@@ -1,6 +1,6 @@
 import Foundation
 
-public enum DaylightError: LocalizedError {
+public enum TechnicolorZebraError: LocalizedError {
     case message(String), cancelled
     public var errorDescription: String? {
         switch self {
@@ -42,24 +42,24 @@ public struct MediaInfo: Decodable {
     public func count(_ type: String) -> Int { streams.filter { $0.codec_type == type }.count }
 
     public func validateInput() throws {
-        guard let video else { throw DaylightError.message("No video track found.") }
+        guard let video else { throw TechnicolorZebraError.message("No video track found.") }
         guard count("video") == 1 else {
-            throw DaylightError.message("Multiple video tracks are not supported yet. Nothing was changed.")
+            throw TechnicolorZebraError.message("Multiple video tracks are not supported yet. Nothing was changed.")
         }
-        guard duration.isFinite, duration > 0 else { throw DaylightError.message("Could not determine video duration.") }
+        guard duration.isFinite, duration > 0 else { throw TechnicolorZebraError.message("Could not determine video duration.") }
         // Dolby Vision requires profile-aware reshaping; never guess from transfer tags.
         if video.side_data_list?.contains(where: { ($0.side_data_type ?? "").lowercased().contains("dovi") || $0.dv_profile != nil }) == true {
-            throw DaylightError.message("Dolby Vision is not supported in this version. Use an HDR10 or HLG source.")
+            throw TechnicolorZebraError.message("Dolby Vision is not supported in this version. Use an HDR10 or HLG source.")
         }
         guard ["smpte2084", "arib-std-b67"].contains(video.color_transfer ?? "") else {
-            throw DaylightError.message("This video is SDR or has unrecognized HDR metadata. No conversion needed or attempted.")
+            throw TechnicolorZebraError.message("This video is SDR or has unrecognized HDR metadata. No conversion needed or attempted.")
         }
         guard video.color_primaries == "bt2020", video.color_space == "bt2020nc" else {
-            throw DaylightError.message("This HDR color format is not supported yet. Nothing was changed.")
+            throw TechnicolorZebraError.message("This HDR color format is not supported yet. Nothing was changed.")
         }
         guard let width = video.width, let height = video.height, width > 0, height > 0,
               width % 2 == 0, height % 2 == 0 else {
-            throw DaylightError.message("Unsupported video dimensions.")
+            throw TechnicolorZebraError.message("Unsupported video dimensions.")
         }
     }
 

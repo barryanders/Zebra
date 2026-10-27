@@ -13,5 +13,5 @@ jobs:
         run: ./scripts/build-app.sh
       - uses: actions/upload-artifact@v4
         with:
-          name: Daylight-macOS
+          name: Technicolor-Zebra-macOS
           path: dist/*.zip

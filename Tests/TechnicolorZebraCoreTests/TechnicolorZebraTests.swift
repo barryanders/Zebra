@@ -1,7 +1,7 @@
 import XCTest
-@testable import DaylightCore
+@testable import TechnicolorZebraCore
 
-final class DaylightTests: XCTestCase {
+final class TechnicolorZebraTests: XCTestCase {
     func info(transfer: String = "smpte2084", width: Int = 3840, extra: String = "", rate: String = "20000000") throws -> MediaInfo {
         let json = """
         {"streams":[{"codec_type":"video","width":\(width),"height":2160,"color_transfer":"\(transfer)","color_primaries":"bt2020","color_space":"bt2020nc","bit_rate":"\(rate)"\(extra)}],"format":{"duration":"60"}}
@@ -75,7 +75,7 @@ final class DaylightTests: XCTestCase {
         try FileManager.default.createDirectory(at: folder, withIntermediateDirectories: true)
         defer { try? FileManager.default.removeItem(at: folder) }
         let subs = folder.appendingPathComponent("captions.srt")
-        try "1\n00:00:00,000 --> 00:00:01,000\nDaylight test\n".write(to: subs, atomically: true, encoding: .utf8)
+        try "1\n00:00:00,000 --> 00:00:01,000\nTechnicolorZebra test\n".write(to: subs, atomically: true, encoding: .utf8)
         let metadata = folder.appendingPathComponent("chapters.txt")
         try ";FFMETADATA1\n[CHAPTER]\nTIMEBASE=1/1000\nSTART=0\nEND=900\ntitle=Example\n".write(to: metadata, atomically: true, encoding: .utf8)
         let attachment = folder.appendingPathComponent("note.txt")

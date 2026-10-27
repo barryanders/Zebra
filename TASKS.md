@@ -1,4 +1,4 @@
-# Daylight
+# Zebra
 
 ## v0.1 acceptance
 - Native compact macOS drop window; no encoding settings.
@@ -26,3 +26,17 @@
 ## v0.1.1
 - Restrict FFmpeg/ffprobe to file and pipe protocols, including validation.
 - Split bitrate parsing for the older Swift compiler used by GitHub's macOS runner.
+
+## v0.2 branding and publication
+- Rename to Zebra, retaining the bundle ID for upgrade continuity.
+- Use the zebra icon in the app and installable package.
+- Publish the renamed repository and preview release, and add the product to the
+  existing Anders GitHub Pages catalog with setup and supported-format details.
+
+## v0.2 final choices and verification
+- Final name: Zebra, descriptor “HDR to SDR for Mac”.
+- Latest sculptural cinematic zebra icon selected after four rejected candidates.
+- Optional Buy Me a Coffee link in the main window and Help menu.
+- All nine tests passed after module renaming; final release app built and signed.
+- Product page and catalog entry checked at desktop and phone widths.
+- Public repository is barryanders/zebra. Bundle identifier retained for continuity.

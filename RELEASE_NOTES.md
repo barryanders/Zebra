@@ -1,6 +1,8 @@
-# Daylight v0.1.1 — local-only preview
+# Zebra v0.2.0 — Preview
 
-This update restricts FFmpeg inputs to local file and pipe protocols.
+Daylight is now Zebra, with a new zebra icon and the same simple
+local conversion workflow. The bundle identifier is unchanged for continuity.
+An optional Buy Me a Coffee link is available in the window and Help menu.
 
 A small native Mac app that makes SDR copies of HDR videos with no encoding settings.
 
@@ -9,9 +11,9 @@ originals. The app runs locally and keeps originals untouched.
 
 ## Download and setup
 
-- `Daylight-arm64.zip` is the Apple Silicon build, for macOS 14 or later.
+- `Zebra-arm64.zip` is the Apple Silicon build, for macOS 14 or later.
 - Install the conversion tools once with `brew install ffmpeg-full`.
-- Unzip Daylight and move it to Applications.
+- Unzip Zebra and move it to Applications.
 - The app is ad-hoc signed, not notarized. macOS may require per-app approval in
   Privacy & Security. Source builds are also available; see the README.
 
