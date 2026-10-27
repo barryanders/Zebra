@@ -4,7 +4,7 @@
 
 <img src="Assets/zebra-icon.png" width="160" alt="Zebra app icon">
 
-[Website](https://barryanders.github.io/zebra/) · [Download preview](https://github.com/barryanders/zebra/releases/tag/v0.2.0)
+[Website](https://barryanders.github.io/zebra/) · [Download preview](https://github.com/barryanders/Zebra/releases/tag/v0.2.0)
 
 Previously called Daylight.
 
@@ -50,7 +50,7 @@ an Intel build and working HEVC VideoToolbox encoding; Intel has not been tested
    FFmpeg installation also works if it includes `zscale`, `tonemap`, and
    `hevc_videotoolbox`. Missing capabilities produce an actionable message.
 
-2. Download the Apple Silicon app ZIP from [Releases](https://github.com/barryanders/zebra/releases), unzip it, and move Zebra to Applications.
+2. Download the Apple Silicon app ZIP from [Releases](https://github.com/barryanders/Zebra/releases), unzip it, and move Zebra to Applications.
 3. Open Zebra and add videos.
 
 Preview builds are ad-hoc signed, **not Developer ID signed or notarized**.
@@ -66,8 +66,8 @@ Use a player with MKV and HEVC support, such as IINA or VLC.
 Install Xcode (or a compatible Swift toolchain with the macOS SDK), then:
 
 ```sh
-git clone https://github.com/barryanders/zebra.git
-cd zebra
+git clone https://github.com/barryanders/Zebra.git
+cd Zebra
 swift test --build-system native
 ./scripts/build-app.sh
 open "dist/Zebra.app"
