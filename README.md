@@ -15,6 +15,10 @@ copy**, and let Zebra work locally.
 > Early preview. HDR10 and HLG are supported. Dolby Vision is deliberately
 > rejected until profile-aware conversion is implemented and tested.
 
+## Screenshots
+
+![Zebra on macOS](docs/screenshots/zebra.jpg)
+
 ## What it does
 
 - Queues local files in a compact SwiftUI window.
