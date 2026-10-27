@@ -37,6 +37,8 @@ final class DaylightTests: XCTestCase {
         let args = ConversionPlan.arguments(input: source, output: URL(fileURLWithPath: "/tmp/out.mkv"), info: try info())
         XCTAssertTrue(args.contains(source.path))
         XCTAssertTrue(args.contains("-n"))
+        XCTAssertTrue(args.contains("-protocol_whitelist"))
+        XCTAssertTrue(args.contains("file,pipe"))
         XCTAssertFalse(args.contains("-y"))
         XCTAssertTrue(args.contains("0:a?"))
         XCTAssertTrue(args.contains("0:s?"))

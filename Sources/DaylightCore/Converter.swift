@@ -96,7 +96,7 @@ public final class Converter: @unchecked Sendable {
     private let tools: VideoTools
     public init(tools: VideoTools, runner: ProcessRunner = ProcessRunner()) { self.tools = tools; self.runner = runner }
     public func probe(_ url: URL) throws -> MediaInfo {
-        let data = try runner.run(tools.ffprobe, ["-v", "error", "-show_streams", "-show_chapters", "-show_format", "-of", "json", url.path])
+        let data = try runner.run(tools.ffprobe, ["-v", "error", "-protocol_whitelist", "file,pipe", "-show_streams", "-show_chapters", "-show_format", "-of", "json", url.path])
         return try JSONDecoder().decode(MediaInfo.self, from: data)
     }
     public func convert(_ input: URL, update: @escaping (ConversionUpdate) -> Void) throws -> URL {
@@ -130,7 +130,7 @@ public final class Converter: @unchecked Sendable {
             return type.contains("mastering") || type.contains("content light") || type.contains("hdr") || type.contains("dovi")
         } ?? false
         guard !hdrData else { throw DaylightError.message("Unexpected HDR metadata remains. Your original is unchanged.") }
-        _ = try runner.run(tools.ffmpeg, ["-nostdin", "-v", "error", "-xerror", "-i", partial.path, "-map", "0:v:0", "-map", "0:a?", "-f", "null", "-"])
+        _ = try runner.run(tools.ffmpeg, ["-nostdin", "-v", "error", "-xerror", "-protocol_whitelist", "file,pipe", "-i", partial.path, "-map", "0:v:0", "-map", "0:a?", "-f", "null", "-"])
         try runner.checkCancellation()
         let current = try fm.attributesOfItem(atPath: input.path)
         guard attributes[.size] as? NSNumber == current[.size] as? NSNumber,

@@ -22,3 +22,7 @@
   height. A second screen capture was unavailable after the display capture service
   failed; recheck the final queue layout on an unlocked Mac.
 - Separate FFmpeg installation is required; no third-party binaries are bundled.
+
+## v0.1.1
+- Restrict FFmpeg/ffprobe to file and pipe protocols, including validation.
+- Split bitrate parsing for the older Swift compiler used by GitHub's macOS runner.

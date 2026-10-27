@@ -1,4 +1,6 @@
-# Daylight v0.1.0 — first preview
+# Daylight v0.1.1 — local-only preview
+
+This update restricts FFmpeg inputs to local file and pipe protocols.
 
 A small native Mac app that makes SDR copies of HDR videos with no encoding settings.
 

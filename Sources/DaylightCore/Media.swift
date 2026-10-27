@@ -65,7 +65,10 @@ public struct MediaInfo: Decodable {
 
     public var targetBitrate: Int {
         let highResolution = (video?.width ?? 0) >= 2500 || (video?.height ?? 0) > 1200
-        let raw = Double(video?.bit_rate ?? "") ?? Double(video?.tags?["BPS"] ?? "") ?? Double(format.bit_rate ?? "") ?? 6_000_000
+        let streamRate = Double(video?.bit_rate ?? "")
+        let taggedRate = Double(video?.tags?["BPS"] ?? "")
+        let containerRate = Double(format.bit_rate ?? "")
+        let raw: Double = streamRate ?? taggedRate ?? containerRate ?? 6_000_000
         let rate = raw.isFinite && raw > 0 ? raw : 6_000_000
         let floor = highResolution ? 6_000_000.0 : 1_500_000.0
         let ceiling = highResolution ? 12_000_000.0 : 5_000_000.0
@@ -78,7 +81,7 @@ public enum ConversionPlan {
 
     public static func arguments(input: URL, output: URL, info: MediaInfo) -> [String] {
         let rate = info.targetBitrate
-        return ["-nostdin", "-hide_banner", "-v", "error", "-n", "-i", input.path,
+        return ["-nostdin", "-hide_banner", "-v", "error", "-n", "-protocol_whitelist", "file,pipe", "-i", input.path,
                 "-map", "0:v:0", "-map", "0:a?", "-map", "0:s?", "-map", "0:t?",
                 "-map_metadata", "0", "-map_chapters", "0", "-vf", filter,
                 "-c:v", "hevc_videotoolbox", "-profile:v", "main10", "-b:v", String(rate),
