@@ -17,6 +17,8 @@ copy**, and let Zebra work locally.
 
 ## Screenshots
 
+Real app captures. [Explore the full-size showcase](https://barryanders.github.io/zebra/).
+
 ![Zebra on macOS](docs/screenshots/zebra.jpg)
 
 ## What it does
