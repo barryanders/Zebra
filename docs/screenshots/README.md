@@ -1,9 +1,14 @@
 # Screenshot sources
 
-Actual Zebra 0.2.0 window captured on October 26, 2026. The purple title-bar indicator is the macOS screen-sharing indicator.
+`zebra-ready.png` and `zebra-complete.png` show the actual Zebra 0.2.0 app,
+captured October 31, 2026 using a generated three-second 1920 × 1080
+PQ/BT.2020 test clip. The converted output was verified as Rec.709 SDR.
+No personal media is pictured.
 
-October 31, 2026: `zebra-ready.png` and `zebra-complete.png` are unretouched
-680 × 1152 captures of the actual Zebra 0.2.0 app. A generated three-second
-1920 × 1080 PQ/BT.2020 test clip was added and converted through the UI. The
-output was verified as 1920 × 1080 Rec.709 SDR. No personal media is pictured.
-The purple title-bar indicator belongs to macOS screen sharing.
+The 150 × 62 pixel top-left title-bar area was retouched to replace the macOS
+screen-sharing indicator with window controls (including the disabled gray
+zoom button). This patch was made with image generation and composited onto
+the original captures. Everything outside that patch is pixel-identical to
+the original app capture. Both images remain 680 × 1152.
+
+The older `zebra.jpg` is an October 26 capture with the screen-sharing indicator.
