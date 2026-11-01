@@ -19,7 +19,12 @@ copy**, and let Zebra work locally.
 
 Real app captures. [Explore the full-size showcase](https://barryanders.github.io/zebra/).
 
-![Zebra on macOS](docs/screenshots/zebra.jpg)
+<p>
+  <img src="docs/screenshots/zebra-ready.png" width="320" alt="Zebra ready to convert an HDR sample">
+  <img src="docs/screenshots/zebra-complete.png" width="320" alt="Zebra after completing the SDR copy">
+</p>
+
+Ready to convert → SDR copy ready. Actual app captures using a generated HDR sample.
 
 ## What it does
 
